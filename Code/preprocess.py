@@ -1,23 +1,28 @@
 import pandas as pd 
 import re
 from Config import *
-from utils import format_types
+from utils import format_types_two
 
 
 def get_input_data()->pd.DataFrame:
-    df1 = pd.read_csv("C:/Users/jesse/OneDrive/Desktop/NCI/Engineering and Evaluating Artificial Intelligence/CA1/Sample Solution/CA - Project Sample Solution/data/AppGallery.csv", skipinitialspace=True)
+    #reading dataframes and renaming their type columns
+    df1 = pd.read_csv("C:/Users/jesse/OneDrive/Desktop/NCI/Engineering and Evaluating Artificial Intelligence/Github_CA1/EEAI_CA1/Code/data/AppGallery.csv", skipinitialspace=True)
     df1.rename(columns={'Type 1': 'y1', 'Type 2': 'y2', 'Type 3': 'y3', 'Type 4': 'y4'}, inplace=True)
-    df2 = pd.read_csv("C:/Users/jesse/OneDrive/Desktop/NCI/Engineering and Evaluating Artificial Intelligence/CA1/Sample Solution/CA - Project Sample Solution/data/Purchasing.csv", skipinitialspace=True)
+    df2 = pd.read_csv("C:/Users/jesse/OneDrive/Desktop/NCI/Engineering and Evaluating Artificial Intelligence/Github_CA1/EEAI_CA1/Code/data/Purchasing.csv", skipinitialspace=True)
     df2.rename(columns={'Type 1': 'y1', 'Type 2': 'y2', 'Type 3': 'y3', 'Type 4': 'y4'}, inplace=True)
+    #concatinating the dataframes together
     df = pd.concat([df1, df2])
+    #changing type of column to unicode
     df[Config.INTERACTION_CONTENT] = df[Config.INTERACTION_CONTENT].values.astype('U')
     df[Config.TICKET_SUMMARY] = df[Config.TICKET_SUMMARY].values.astype('U')
     # add `formatted_` type columns
-    df[Config.FORMATTED_TYPE_COLS] = df[Config.TYPE_COLS].apply(format_types, axis=1)
-    df[Config.CLASS_COL] = df[Config.FORMATTED_TYPE_COLS[-1]].copy()
+    df[Config.FORMATTED_TYPE_COLS] = df[Config.TYPE_COLS].apply(format_types_two, axis=1)
+    df[Config.CLASS_COL] = df[Config.FORMATTED_TYPE_COLS[0]].copy()
+    #create a y column that is column tat contains y2 -> y4 data all in one column
     df["y"] = df[Config.CLASS_COL]
     df = df.loc[(df["y"] != '') & (~df["y"].isna()),]
     return df
+
 
 def de_duplication(data: pd.DataFrame):
     data["ic_deduplicated"] = ""
@@ -112,6 +117,7 @@ def de_duplication(data: pd.DataFrame):
     data[Config.INTERACTION_CONTENT] = data['ic_deduplicated']
     data = data.drop(columns=['ic_deduplicated'])
     return data
+
 
 def noise_remover(df: pd.DataFrame):
     noise = "(sv\s*:)|(wg\s*:)|(ynt\s*:)|(fw(d)?\s*:)|(r\s*:)|(re\s*:)|(\[|\])|(aspiegel support issue submit)|(null)|(nan)|((bonus place my )?support.pt 自动回复:)"
