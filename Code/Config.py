@@ -8,7 +8,6 @@ class Config:
     CHAIN_TWO_TYPE_COLS = ['y2', 'y3']
     CLASS_COL = 'y2'
 
-
     # Variables for CA 1 Task
     CLASS_COL = 'full_type'
     EMPTY_TYPE = 'none'
