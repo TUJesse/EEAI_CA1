@@ -43,6 +43,7 @@ class Voting(BaseModel):
         write_to_file(Config.OUTPUT_FILE, f"\n{classification_name}: \nAccuracy = {scoring}")
         self.been_called()
     
+    #ref: https://dzone.com/articles/python-how-to-tell-if-a-function-has-been-called
     def been_called(self):
         if self.has_been_called == False:
             self.has_been_called = True
