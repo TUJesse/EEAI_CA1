@@ -17,3 +17,7 @@ def format_types_two(types: pd.Series) -> pd.Series:
 
 def parse_full_type(full_type: str) -> pd.Series:
     return format_types(pd.Series(full_type.split(Config.JOIN_CHAR)))
+
+def write_to_file(file, message):
+    with open(file, "a") as f:
+        f.write(message)

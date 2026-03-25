@@ -5,7 +5,7 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from Config import *
-from utils import parse_full_type
+from utils import write_to_file
 
 class AdaBoost(BaseModel):
     def __init__(self,
@@ -33,31 +33,13 @@ class AdaBoost(BaseModel):
         self.scoring = scoring
 
         print(f"{classification_name}: \nAccuracy = {scoring}")
+        write_to_file(Config.OUTPUT_FILE, f"\n{classification_name}: \nAccuracy = {scoring}")
         self.been_called()
     
     def been_called(self):
         if self.has_been_called == False:
             self.has_been_called = True
             self.mdl = MultiOutputClassifier(AdaBoostClassifier(n_estimators=100, random_state=0))
-
-    # def train(self, data) -> None:
-    #     self.mdl = self.mdl.fit(data.X_train, data.y_train)
-
-    # def predict(self, X_test: pd.Series):
-    #     predictions = self.mdl.predict(X_test)
-    #     self.predictions = predictions
-
-    # def print_results(self, data):
-    #     ytest = pd.Series(data.y_test).astype("string")
-    #     ypred = pd.Series(self.predictions).astype("string")
-    #     test_df = pd.concat([ytest, ypred], axis=1)
-    #     test_df.columns = ['full_type', 'pred_full_type']
-    #     test_df[Config.PRED_TYPE_COLS] = test_df['pred_full_type'].apply(parse_full_type)
-    #     test_df[Config.FORMATTED_TYPE_COLS] = test_df['full_type'].apply(parse_full_type)
-    #     from sklearn.metrics import accuracy_score
-    #     accuracies = [accuracy_score(test_df[true_col], test_df[pred_col])
-    #                   for true_col, pred_col in zip(Config.FORMATTED_TYPE_COLS, Config.PRED_TYPE_COLS)]
-    #     print(accuracies)
 
 
     def data_transform(self) -> None:

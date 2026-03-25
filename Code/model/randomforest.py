@@ -6,7 +6,7 @@ from sklearn.multioutput import MultiOutputClassifier
 #from sklearn.metrics import classification_report, confusion_matrix
 from numpy import *
 from Config import *
-#from utils import parse_full_type
+from utils import write_to_file
 import random
 num_folds = 0
 seed =0
@@ -47,6 +47,7 @@ class RandomForest(BaseModel):
         self.scoring = scoring
 
         print(f"{classification_name}: \nAccuracy = {scoring}")
+        write_to_file(Config.OUTPUT_FILE, f"\n{classification_name}: \nAccuracy = {scoring}")
         self.been_called()
     
     #ref: https://dzone.com/articles/python-how-to-tell-if-a-function-has-been-called
@@ -54,18 +55,8 @@ class RandomForest(BaseModel):
         if self.has_been_called == False:
             self.has_been_called = True
             self.mdl = MultiOutputClassifier(RandomForestClassifier(n_estimators=1000, random_state=seed, class_weight='balanced_subsample'))
-        
+    
 
-        # ytest = pd.Series(data.y_test).astype("string")
-        # ypred = pd.Series(self.predictions).astype("string")
-        # test_df = pd.concat([ytest, ypred], axis=1)
-        # test_df.columns = ['full_type', 'pred_full_type']
-        # test_df[Config.PRED_TYPE_COLS] = test_df['pred_full_type'].apply(parse_full_type)
-        # test_df[Config.FORMATTED_TYPE_COLS] = test_df['full_type'].apply(parse_full_type)
-        # from sklearn.metrics import accuracy_score
-        # accuracies = [accuracy_score(test_df[true_col], test_df[pred_col])
-        #               for true_col, pred_col in zip(Config.FORMATTED_TYPE_COLS, Config.PRED_TYPE_COLS)]
-        # print(accuracies)
 
 
 

@@ -1,0 +1,42 @@
+RandomForest
+y2: 
+Accuracy = 0.8064516129032258
+y2 + y3: 
+Accuracy = 0.5806451612903226
+y2 + y3 + y4: 
+Accuracy = 0.532258064516129
+Hist_GB
+y2: 
+Accuracy = 0.6935483870967742
+y2 + y3: 
+Accuracy = 0.45161290322580644
+y2 + y3 + y4: 
+Accuracy = 0.3709677419354839
+SGD
+y2: 
+Accuracy = 0.8225806451612904
+y2 + y3: 
+Accuracy = 0.5483870967741935
+y2 + y3 + y4: 
+Accuracy = 0.45161290322580644
+AdaBoost
+y2: 
+Accuracy = 0.7096774193548387
+y2 + y3: 
+Accuracy = 0.3709677419354839
+y2 + y3 + y4: 
+Accuracy = 0.16129032258064516
+Voting
+y2: 
+Accuracy = 0.8387096774193549
+y2 + y3: 
+Accuracy = 0.5161290322580645
+y2 + y3 + y4: 
+Accuracy = 0.46774193548387094
+RandomTreesEmbedding
+y2: 
+Accuracy = 0.6774193548387096
+y2 + y3: 
+Accuracy = 0.27419354838709675
+y2 + y3 + y4: 
+Accuracy = 0.16129032258064516

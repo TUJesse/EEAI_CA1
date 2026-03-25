@@ -17,3 +17,4 @@ class Config:
     FORMATTED_TYPE_COLS = [f"formatted_{col}" for col in TYPE_COLS]
     CHAIN_TWO_COLS = [f"formatted_{col}" for col in CHAIN_TWO_TYPE_COLS]
     PRED_TYPE_COLS = [f"pred_{col}" for col in TYPE_COLS]
+    OUTPUT_FILE = 'Output.txt'
