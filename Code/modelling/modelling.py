@@ -9,7 +9,6 @@ from Config import *
 
 
 def model_predict(data, df):
-    results = []
     print("RandomForest")
     write_to_file(Config.OUTPUT_FILE, "RandomForest")
     model = RandomForest("RandomForest", data.get_embeddings())
@@ -68,7 +67,3 @@ def model_predict(data, df):
         model.train(X_trains, y_trains)
         model.predict(X_tests)
         model.print_results(X_tests, y_tests, classification_types)
-
-
-def model_evaluate(model, data):
-    model.print_results(data)

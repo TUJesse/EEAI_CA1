@@ -46,6 +46,7 @@ class Voting(BaseModel):
     def been_called(self):
         if self.has_been_called == False:
             self.has_been_called = True
+            #ref: https://stackoverflow.com/questions/62317479/how-to-get-f-measure-in-multiclass-multioutput-classification-in-python
             self.mdl = MultiOutputClassifier(eclf1)
 
 

@@ -13,6 +13,3 @@ def get_tfidf_embd(df:pd.DataFrame):
     X = tfidfconverter.fit_transform(data).toarray()
     return X
 
-def combine_embd(X1, X2):
-    return np.concatenate((X1, X2), axis=1)
-

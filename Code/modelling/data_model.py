@@ -14,7 +14,6 @@ class Data():
 
         X_DL = df[Config.TICKET_SUMMARY] + ' ' + df[Config.INTERACTION_CONTENT]
         X_DL = X_DL.to_numpy()
-        #turning the y column to a numpy array, this code might need to change in new implementation
         y = df.y.to_numpy()
 
         #ref: https://www.geeksforgeeks.org/machine-learning/an-introduction-to-multilabel-classification/
@@ -24,19 +23,15 @@ class Data():
 
         self.X_train, self.X_test, self.y_train, self.y_test= train_test_split(X, y, test_size=0.3, random_state=42)
         self.y = y
-        #self.classes = good_y_value
         self.embeddings = X
 
 
         self.two_X_train, self.two_X_test, self.two_y_train, self.two_y_test= train_test_split(X, y_two_chain, test_size=0.3, random_state=42)
         self.two_y = y_two_chain
-        #self.classes = good_y_value
-        #self.embeddings = X
 
         self.three_X_train, self.three_X_test, self.three_y_train, self.three_y_test = train_test_split(X, y_three_chain, test_size=0.3, random_state=42)
         self.three_y = y_three_chain
 
-    # connectors maybe?
     def get_type(self):
         return  [self.y, self.two_y, self.three_y]
     def get_X_train(self):
